@@ -1,0 +1,23 @@
+{
+  "container-registries": [
+    {
+      "url": "docker.io",
+      "api-url": "https://registry-1.docker.io",
+      "user-name": "mohammedzee1000",
+      "password": "Blrtia@#$123",
+      "images": [
+        {
+          "org": "aveshasystems",
+          "image-tags": [
+            {
+              "image": "netops",
+              "tags": [
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "exception-patterns": []
+}
