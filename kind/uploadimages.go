@@ -1,13 +1,13 @@
 package kind
 
 import (
+	"github.com/mohammedzee1000/magescripts/pkg/apis/containerimages"
+	"github.com/mohammedzee1000/magescripts/pkg/commands/dockerlike"
+	"github.com/mohammedzee1000/magescripts/pkg/commands/kind"
 	dockerparser "github.com/novln/docker-parser"
 	"log"
 	"os"
 	"regexp"
-	"scripts/pkg/apis/containerimages"
-	"scripts/pkg/commands/dockerlike"
-	"scripts/pkg/commands/kind"
 )
 
 type RegistryListWithExceptions struct {

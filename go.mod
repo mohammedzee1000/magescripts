@@ -1,4 +1,4 @@
-module scripts
+module github.com/mohammedzee1000/magescripts
 
 go 1.18
 

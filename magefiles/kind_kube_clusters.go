@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/magefile/mage/mg" // mg contains helpful utility functions, like Deps
+	"github.com/mohammedzee1000/magescripts/kind"
 	"io/ioutil"
-	"scripts/kind"
 	"strings"
 )
 
