@@ -1,12 +1,13 @@
 package kind
 
 import (
-	"github.com/magefile/mage/sh"
 	dockerparser "github.com/novln/docker-parser"
 	"log"
+	"os"
 	"regexp"
+	"scripts/pkg/apis/containerimages"
 	"scripts/pkg/commands/dockerlike"
-	"scripts/pkg/containerimages"
+	"scripts/pkg/commands/kind"
 )
 
 type RegistryListWithExceptions struct {
@@ -59,7 +60,7 @@ func ValidateAndUploadImage(image, clusterName string, deleteAfterUpload bool) e
 	if err != nil {
 		return err
 	}
-	err = sh.Run("kind", "load", "image-archive", path, "--name", clusterName)
+	err = kind.NewDefault().UploadImageArchive(path, clusterName)
 	if err != nil {
 		return err
 	}
@@ -68,6 +69,9 @@ func ValidateAndUploadImage(image, clusterName string, deleteAfterUpload bool) e
 		if err != nil {
 			return err
 		}
+	}
+	if err = os.Remove(path); err != nil && !os.IsNotExist(err) {
+		return err
 	}
 	return nil
 }
