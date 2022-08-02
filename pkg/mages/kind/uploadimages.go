@@ -1,9 +1,9 @@
 package kind
 
 import (
-	"github.com/mohammedzee1000/magescripts/pkg/apis/containerimages"
-	"github.com/mohammedzee1000/magescripts/pkg/commands/dockerlike"
-	"github.com/mohammedzee1000/magescripts/pkg/commands/kind"
+	"github.com/mohammedzee1000/magescripts/pkg/spells/containerimages"
+	"github.com/mohammedzee1000/magescripts/pkg/wands/dockerlike"
+	"github.com/mohammedzee1000/magescripts/pkg/wands/kind"
 	dockerparser "github.com/novln/docker-parser"
 	"log"
 	"os"
@@ -47,11 +47,13 @@ func UploadImagesJSON(rl *RegistryListWithExceptions, clusterName string, delete
 func ValidateAndUploadImage(image, clusterName string, deleteAfterUpload bool) error {
 	var err error
 	var path string
+	var dr dockerlike.DockerRunnerInterface
+	var kr kind.KindRunnerInterface
 	_, err = dockerparser.Parse(image)
 	if err != nil {
 		return err
 	}
-	dr := dockerlike.NewDefault()
+	dr = dockerlike.NewDefault()
 	err = dr.Pull(image)
 	if err != nil {
 		return err
@@ -60,7 +62,8 @@ func ValidateAndUploadImage(image, clusterName string, deleteAfterUpload bool) e
 	if err != nil {
 		return err
 	}
-	err = kind.NewDefault().UploadImageArchive(path, clusterName)
+	kr = kind.NewDefault()
+	err = kr.UploadImageArchive(path, clusterName)
 	if err != nil {
 		return err
 	}
